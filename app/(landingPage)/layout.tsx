@@ -1,11 +1,13 @@
 import { NavigationMenuBar } from "./_components/navbar";
+import { Sidebar } from "./_components/sidebar";
 
 const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <>
       <NavigationMenuBar />
+      {/* <Sidebar /> */}
       {children}
-    </div>
+    </>
   );
 };
 export default LandingPageLayout;

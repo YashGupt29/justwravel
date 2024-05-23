@@ -9,8 +9,6 @@ interface MyContextProps {
   token: string;
   setToken: (value: string) => void;
   removeToken: () => void;
-  image: string;
-  setImage: (value: string) => void;
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
@@ -29,13 +27,10 @@ interface ReduxProviderProps {
 
 const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
   const [token, setToken, removeToken] = useLocalStorage("token", "");
-  const [image, setImage] = useLocalStorage("image", "");
 
   return (
     <Provider store={store}>
-      <MyContext.Provider
-        value={{ token, setToken, removeToken, image, setImage }}
-      >
+      <MyContext.Provider value={{ token, setToken, removeToken }}>
         {children}
       </MyContext.Provider>
     </Provider>

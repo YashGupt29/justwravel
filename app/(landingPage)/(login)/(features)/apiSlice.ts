@@ -13,7 +13,16 @@ export const apiSlice = createApi({
         body: credentials,
       }),
     }),
+    fetchUser: builder.query<User, string>({
+      query: (token) => ({
+        url: "/auth/me",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useLoginUserMutation } = apiSlice;
+export const { useLoginUserMutation, useFetchUserQuery } = apiSlice;

@@ -38,7 +38,7 @@ import { useMyContext } from "@/lib/reduxProvider";
 
 export function Profile() {
   const user = useSelector((state: RootState) => state.user);
-  const { image, removeToken } = useMyContext();
+  const { removeToken } = useMyContext();
   const Logout = () => {
     console.log("logout");
     removeToken();
@@ -48,7 +48,7 @@ export function Profile() {
       <DropdownMenuTrigger className="focus:outline-none">
         <div className="flex justify-center items-center gap-2">
           <Avatar className="bg-gray-400 p-2 rounded-full h-[50px] w-[50px] cursor-pointer flex  items-center justify-center">
-            <AvatarImage src={image} alt="image" />
+            <AvatarImage src={user?.image} alt="image" />
             <AvatarFallback>PF</AvatarFallback>
           </Avatar>
           <span>{user.firstName}</span>

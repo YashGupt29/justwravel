@@ -1,4 +1,3 @@
-// src/app/store.ts
 import { apiSlice } from "@/app/(landingPage)/(login)/(features)/apiSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "@/app/(landingPage)/(login)/(features)/userSlice";
