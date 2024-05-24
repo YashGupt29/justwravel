@@ -35,12 +35,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { useMyContext } from "@/lib/reduxProvider";
+import { useRouter } from "next/navigation";
 
 export function Profile() {
   const user = useSelector((state: RootState) => state.user);
+  const router = useRouter();
   const { removeToken } = useMyContext();
   const Logout = () => {
-    console.log("logout");
+    router.push("/login");
     removeToken();
   };
   return (
