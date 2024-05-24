@@ -5,7 +5,6 @@ const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <NavigationMenuBar />
-      {/* <Sidebar /> */}
       {children}
     </>
   );

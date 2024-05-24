@@ -64,9 +64,9 @@ const LandingPage = () => {
     return null;
   }
   return (
-    <div>
+    <>
       <Body />
-    </div>
+    </>
   );
 };
 export default LandingPage;

@@ -34,11 +34,11 @@ export const Body = () => {
   }, []);
 
   if (!isLargeScreen) {
-    return <div>small</div>;
+    return null;
   }
   return (
     <div
-      className="relative h-screen bg-cover bg-center"
+      className="relative h-[89vh] bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: 'url("/banner.jpg")' }}
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
