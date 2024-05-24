@@ -60,12 +60,27 @@ export function NavigationMenuBar() {
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
+  React.useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect;
+        setIsLargeScreen(width >= 1024);
+      }
+    });
+
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
   if (!isMounted) {
     return null;
   }
+
   if (!isLargeScreen) {
     return (
-      <div className="flex flex-col h-screen bg-gradient-to-b from-[#255CB8] to-sky-100">
+      <div className="flex flex-col bg-gradient-to-b from-sky-100 to-[#255CB8]">
         <div className="flex  justify-between p-4 ">
           <Link href="/">
             <Image src="/logo.png" alt="logo" height={180} width={180} />
