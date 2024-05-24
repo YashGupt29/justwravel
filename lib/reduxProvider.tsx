@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, ReactNode, useContext } from "react";
+import React, { createContext, useState, ReactNode, useContext } from "react";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { useLocalStorage } from "usehooks-ts";
@@ -9,6 +9,8 @@ interface MyContextProps {
   token: string;
   setToken: (value: string) => void;
   removeToken: () => void;
+  isLargeScreen: boolean;
+  setIsLargeScreen: (value: boolean) => void;
 }
 
 const MyContext = createContext<MyContextProps | undefined>(undefined);
@@ -27,10 +29,19 @@ interface ReduxProviderProps {
 
 const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
   const [token, setToken, removeToken] = useLocalStorage("token", "");
+  const [isLargeScreen, setIsLargeScreen] = React.useState(false);
 
   return (
     <Provider store={store}>
-      <MyContext.Provider value={{ token, setToken, removeToken }}>
+      <MyContext.Provider
+        value={{
+          token,
+          setToken,
+          removeToken,
+          isLargeScreen,
+          setIsLargeScreen,
+        }}
+      >
         {children}
       </MyContext.Provider>
     </Provider>

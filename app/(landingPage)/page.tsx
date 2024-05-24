@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFetchUserQuery } from "@/app/(landingPage)/(login)/(features)/apiSlice";
 import { setUser } from "@/app/(landingPage)/(login)/(features)/userSlice";
+import { Body } from "./_components/body";
 
 const LandingPage = () => {
   const userImage = useSelector((state: RootState) => state.user.image);
@@ -32,6 +33,10 @@ const LandingPage = () => {
   if (!isMounted) {
     return null;
   }
-  return <></>;
+  return (
+    <div>
+      <Body />
+    </div>
+  );
 };
 export default LandingPage;

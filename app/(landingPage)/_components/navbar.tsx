@@ -23,6 +23,7 @@ import { RootState } from "@/lib/store";
 import { useMyContext } from "@/lib/reduxProvider";
 import { MobileSidebar } from "./mobile-sidebar";
 import { Sidebar } from "./sidebar";
+import { Input } from "@/components/ui/input";
 
 const components: { title: string; href: string }[] = [
   {
@@ -54,10 +55,8 @@ const components: { title: string; href: string }[] = [
 export function NavigationMenuBar() {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user);
-  const { token } = useMyContext();
+  const { token, isLargeScreen, setIsLargeScreen } = useMyContext();
   const [isMounted, setIsMounted] = React.useState(false);
-  const [isLargeScreen, setIsLargeScreen] = React.useState(false);
-
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -70,36 +69,40 @@ export function NavigationMenuBar() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setIsLargeScreen]);
 
   if (!isMounted) {
     return null;
   }
   if (!isLargeScreen) {
     return (
-      <div className="flex justify-between p-4 bg-gradient-to-b from-[#255CB8] to-sky-100">
-        <Link href="/">
-          <Image src="/logo.png" alt="logo" height={180} width={180} />
-        </Link>
-        <div className="flex justify-center items-center gap-2">
-          <div className="bg-blue-300 h-8 w-8 p-2 rounded-full flex justify-center items-center">
-            <PhoneCall fill="white" width={20} className="text-white" />
-          </div>
+      <div className="flex flex-col h-screen bg-gradient-to-b from-[#255CB8] to-sky-100">
+        <div className="flex  justify-between p-4 ">
+          <Link href="/">
+            <Image src="/logo.png" alt="logo" height={180} width={180} />
+          </Link>
+          <div className="flex justify-center gap-2">
+            <div className="bg-blue-300 h-10 w-10 p-2  rounded-full flex justify-center items-center">
+              <PhoneCall fill="white" width={20} className="text-white" />
+            </div>
 
-          <MobileSidebar />
+            <MobileSidebar />
+          </div>
+        </div>
+        <div className="flex items-center justify-center">
+          <Input placeholder="Type Location" className="w-[90%]" />
         </div>
       </div>
     );
   }
   return (
     <>
-      <div className="flex justify-between py-11 lg:py-[20px] lg:px-[130px] shadow-bottom-lg">
+      <div className="flex justify-between items-center pt-[20px]  pb-[25px] lg:px-[2%]  shadow-bottom-lg">
         <Link href="/">
           <Image src="/logo.png" alt="logo" height={180} width={180} />
         </Link>
         <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem></NavigationMenuItem>
+          <NavigationMenuList className="flex gap-1">
             <NavigationMenuItem>
               <Link
                 href="https://www.justwravel.com/backpacking-trips"
@@ -107,7 +110,7 @@ export function NavigationMenuBar() {
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <span className="hidden md:flex text-muted-foreground text-[17px]  font-normal">
+                  <span className="hidden md:flex text-muted-foreground xl:text-[17px]  font-normal">
                     Backpacking Trips
                   </span>
                 </NavigationMenuLink>
@@ -120,7 +123,7 @@ export function NavigationMenuBar() {
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <span className="hidden md:flex text-muted-foreground text-[17px] font-normal">
+                  <span className="hidden md:flex text-muted-foreground xl:text-[17px] font-normal">
                     Treks
                   </span>
                 </NavigationMenuLink>
@@ -133,7 +136,7 @@ export function NavigationMenuBar() {
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <span className="hidden md:flex text-muted-foreground text-[17px]  font-normal">
+                  <span className="hidden md:flex text-muted-foreground xl:text-[17px]  font-normal">
                     Weekend Gateways
                   </span>
                 </NavigationMenuLink>
@@ -141,13 +144,13 @@ export function NavigationMenuBar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger>
-                <span className="hidden md:flex text-muted-foreground text-[17px]  font-normal">
+                <span className="text-muted-foreground xl:text-[17px]  font-normal">
                   More
                 </span>
               </NavigationMenuTrigger>
 
               <NavigationMenuContent>
-                <ul className="hidden md:flex md:flex-col  w-[100px] gap-1 text-md p-4 md:w-[150px] lg:w-[200px]">
+                <ul className="flex flex-col  w-[100px] gap-1 text-md p-4 md:w-[150px] lg:w-[200px]">
                   {components.map((component) => (
                     <ListItem
                       className="text-muted-foreground gap-2"
@@ -161,17 +164,17 @@ export function NavigationMenuBar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex gap-[40px] items-center justify-center">
+        <div className="flex lg:gap-3 xl:gap-[40px] items-center justify-center">
           <div className="flex gap-2">
             <div className="bg-gray-100 rounded-full p-3 flex items-center justify-center">
               <PhoneCall fill="black" width={20} />
             </div>
-            <div className="hidden md:flex flex-col">
+            <div className="flex flex-col">
               <p>Call Us</p>
               <p className="font-medium">+91 8527273564</p>
             </div>
           </div>
-          <Button className="hidden md:flex bg-blue-600 w-[50px] h-[50px]  rounded-full  md:justify-center md:items-center hover:bg-blue-300">
+          <Button className="hidden md:flex bg-blue-600 lg:w-[40px] lg:h-[40px] lg:p-1 xl:p-0 xl:w-[50px] xl:h-[50px]  rounded-full  md:justify-center md:items-center hover:bg-blue-300">
             <Search className="text-white" width={20} height={20} />
           </Button>
           {token ? (

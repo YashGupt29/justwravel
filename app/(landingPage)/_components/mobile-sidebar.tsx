@@ -28,7 +28,7 @@ export const MobileSidebar = () => {
     <>
       <Button
         onClick={onOpen}
-        className="flex items-center justify-center lg:hidden mr-2 bg-blue-300 rounded-full p-1 h-8 w-8"
+        className="flex items-center justify-center lg:hidden mr-2 bg-blue-300 rounded-full p-1 h-10 w-10"
         variant="ghost"
         size="sm"
       >

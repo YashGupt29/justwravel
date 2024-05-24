@@ -47,7 +47,7 @@ export function Profile() {
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none">
         <div className="flex justify-center items-center gap-2">
-          <Avatar className="bg-gray-400 p-2 rounded-full h-[50px] w-[50px] cursor-pointer flex  items-center justify-center">
+          <Avatar className="bg-gray-400 p-2 rounded-full lg:h-[40px] lg:w-[40px] xl:h-[50px] xl:w-[50px] cursor-pointer flex  items-center justify-center">
             <AvatarImage src={user?.image} alt="image" />
             <AvatarFallback>PF</AvatarFallback>
           </Avatar>
