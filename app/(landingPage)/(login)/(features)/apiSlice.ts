@@ -22,7 +22,24 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    refreshAccessToken: builder.query<User, string>({
+      query: (token) => ({
+        url: "/auth/refresh",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          expiresInMins: 30,
+        }),
+      }),
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useFetchUserQuery } = apiSlice;
+export const {
+  useLoginUserMutation,
+  useFetchUserQuery,
+  useRefreshAccessTokenQuery,
+} = apiSlice;

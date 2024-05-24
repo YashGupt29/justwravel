@@ -5,7 +5,10 @@ import { useMyContext } from "@/lib/reduxProvider";
 import { RootState } from "@/lib/store";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchUserQuery } from "@/app/(landingPage)/(login)/(features)/apiSlice";
+import {
+  useFetchUserQuery,
+  useRefreshAccessTokenQuery,
+} from "@/app/(landingPage)/(login)/(features)/apiSlice";
 import { setUser } from "@/app/(landingPage)/(login)/(features)/userSlice";
 import { Body } from "./_components/body";
 
@@ -14,6 +17,8 @@ const LandingPage = () => {
   const { token, isLargeScreen, setIsLargeScreen } = useMyContext();
   const dispatch = useDispatch();
   const [isMounted, setIsMounted] = React.useState(false);
+  const { data: userRefreshedData, refetch: refreshAccessToken } =
+    useRefreshAccessTokenQuery(token);
   const {
     data: user,
     error,
@@ -42,7 +47,19 @@ const LandingPage = () => {
     if (user) {
       dispatch(setUser(user));
     }
-  }, [user, dispatch]);
+    if (userRefreshedData) {
+      dispatch(setUser(userRefreshedData));
+    }
+  }, [user, dispatch, userRefreshedData]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refreshAccessToken();
+    }, 1800000); // Refresh token every 30 minutes
+
+    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+  }, [token, refreshAccessToken]);
+
   if (!isMounted) {
     return null;
   }

@@ -94,7 +94,11 @@ export function NavigationMenuBar() {
           <NavigationMenuList className="flex gap-1">
             <NavigationMenuItem>
               <Link
-                href="https://www.justwravel.com/backpacking-trips"
+                href={
+                  token
+                    ? "https://www.justwravel.com/backpacking-trips"
+                    : "/login"
+                }
                 legacyBehavior
                 passHref
               >
@@ -107,8 +111,7 @@ export function NavigationMenuBar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link
-                href="https://www.justwravel.com/treks"
-                legacyBehavior
+                href={token ? "https://www.justwravel.com/treks" : "/login"}
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -120,8 +123,11 @@ export function NavigationMenuBar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link
-                href="https://www.justwravel.com/weekend-getaways"
-                legacyBehavior
+                href={
+                  token
+                    ? "https://www.justwravel.com/weekend-getaways"
+                    : "/login"
+                }
                 passHref
               >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
