@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion } from "@/components/ui/accordion";
+import Image from "next/image";
+import { Profile } from "./profile";
+import { useRouter } from "next/navigation";
+import { useMyContext } from "@/lib/reduxProvider";
 
 interface SidebarProps {
   storageKey?: string;
@@ -18,44 +22,32 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     {}
   );
 
-  const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
-    (acc: string[], key: string) => {
-      if (expanded[key]) {
-        acc.push(key);
-      }
-      return acc;
-    },
-    []
-  );
-  const onExpand = (id: string) => {
-    setExpanded((curr) => ({
-      ...curr,
-      [id]: !expanded[id],
-    }));
-  };
+  const router = useRouter();
+  const { token } = useMyContext();
+
   return (
     <>
-      <div className="font-medium text-xs flex items-center mb-1">
-        <span className="pl-4">Workspaces</span>
-        <Button
-          asChild
-          type="button"
-          size="icon"
-          variant="ghost"
-          className="ml-auto"
-        >
-          <Link href="/select-org">
-            <Plus className="h-4 w-4" />
-          </Link>
-        </Button>
+      <div className="pl-4 font-medium text-xs flex gap-2 mb-1 flex-col  items-start">
+        <div className=" mb-10">
+          <Image src="/logo.png" alt="logo" width={150} height={150} />
+        </div>
+        <div>
+          {token ? (
+            <Profile />
+          ) : (
+            <Button
+              className="bg-blue-600 rounded-full h-12 hover:bg-blue-300 px-7 py-0 font-semibold text-md"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </Button>
+          )}
+        </div>
+        <span className="pl-4">Backpacking Trips</span>
+        <span className="pl-4">Treks</span>
+        <span className="pl-4">Weekend Gateways</span>
+        <span className="pl-4">Contact Us</span>
       </div>
-      <Accordion
-        type="multiple"
-        defaultValue={defaultAccordionValue}
-        className="space-y-2"
-      >
-        <p>Hello</p>
-      </Accordion>
     </>
   );
 };

@@ -60,17 +60,6 @@ export function NavigationMenuBar() {
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [setIsLargeScreen]);
-
   if (!isMounted) {
     return null;
   }

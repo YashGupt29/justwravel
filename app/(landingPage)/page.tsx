@@ -11,7 +11,7 @@ import { Body } from "./_components/body";
 
 const LandingPage = () => {
   const userImage = useSelector((state: RootState) => state.user.image);
-  const { token } = useMyContext();
+  const { token, isLargeScreen, setIsLargeScreen } = useMyContext();
   const dispatch = useDispatch();
   const [isMounted, setIsMounted] = React.useState(false);
   const {
@@ -24,7 +24,20 @@ const LandingPage = () => {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect;
+        setIsLargeScreen(width >= 1024);
+      }
+    });
 
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
   useEffect(() => {
     if (user) {
       dispatch(setUser(user));

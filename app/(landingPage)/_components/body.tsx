@@ -18,6 +18,20 @@ export const Body = () => {
     "Tawang",
     "Uttrakhand",
   ];
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect;
+        setIsLargeScreen(width >= 1024);
+      }
+    });
+
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   if (!isLargeScreen) {
     return <div>small</div>;

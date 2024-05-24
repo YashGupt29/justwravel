@@ -29,7 +29,7 @@ interface ReduxProviderProps {
 
 const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
   const [token, setToken, removeToken] = useLocalStorage("token", "");
-  const [isLargeScreen, setIsLargeScreen] = React.useState(false);
+  const [isLargeScreen, setIsLargeScreen] = React.useState(true);
 
   return (
     <Provider store={store}>
