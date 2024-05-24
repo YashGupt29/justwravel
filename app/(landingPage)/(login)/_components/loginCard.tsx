@@ -33,7 +33,7 @@ export function LoginCard() {
     }
   };
   return (
-    <Card className="w-[70%]  md:w-[50%]  lg:w-[30%] lg:h-[40%] bg-blue-200 border-none">
+    <Card className="w-[70%]  md:w-[50%]  lg:w-[30%] lg:h-[40%] lg:mt-[-50px] bg-blue-200 border-none">
       <CardHeader>
         <CardTitle className="text-center text-lg">Login</CardTitle>
       </CardHeader>
