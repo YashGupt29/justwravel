@@ -1,9 +1,16 @@
 "use client";
-import React, { createContext, useState, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { useLocalStorage } from "usehooks-ts";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface MyContextProps {
   token: string;
@@ -30,7 +37,16 @@ interface ReduxProviderProps {
 const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
   const [token, setToken, removeToken] = useLocalStorage("token", "");
   const [isLargeScreen, setIsLargeScreen] = React.useState(true);
-
+  const [authenticated, setIsAuthenticated] = React.useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    if (token) {
+      setIsAuthenticated(true);
+    }
+    if (!authenticated) {
+      router.push("/login");
+    }
+  }, [token, setIsAuthenticated, removeToken, authenticated, router]);
   return (
     <Provider store={store}>
       <MyContext.Provider
