@@ -40,13 +40,10 @@ const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
   const [authenticated, setIsAuthenticated] = React.useState(false);
   const router = useRouter();
   useEffect(() => {
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    if (!authenticated) {
+    if (!token) {
       router.push("/login");
     }
-  }, [token, setIsAuthenticated, removeToken, authenticated, router]);
+  }, [token, removeToken, router]);
   return (
     <Provider store={store}>
       <MyContext.Provider
