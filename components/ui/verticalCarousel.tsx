@@ -9,7 +9,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Stars } from "lucide-react";
 export function CarouselOrientation() {
   const testimonials = [
     {
@@ -57,20 +58,38 @@ export function CarouselOrientation() {
       orientation="vertical"
       className=""
     >
-      <CarouselContent className="-mt-1 h-[500px]">
+      <CarouselContent className="-mt-1 h-[550px]">
         {testimonials.map((testimonial, index) => (
           <CarouselItem key={index} className="pt-1 md:basis-3">
             <div className="p-1">
-              <Card className="bg-black bg-opacity-15  w-[500px] ">
-                <CardContent className="flex items-center justify-center p-6">
+              <Card className="bg-black bg-opacity-15  w-[500px] border-r-0">
+                <CardContent className="flex p-6 gap-4 justify-center">
                   <div>
                     <Avatar>
-                      <AvatarFallback />
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                        className="h-[50px] w-[200px] rounded-full"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                   </div>
-                  <span className="text-xl font-semibold text-white">
-                    {testimonial.quote}
-                  </span>
+                  <div className="flex flex-col gap-2">
+                    <p className="flex">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <Stars
+                          key={index}
+                          fill="yellow"
+                          className="text-yellow-200"
+                          height={20}
+                          width={20}
+                        />
+                      ))}
+                    </p>
+                    <span className="text-xl font-semibold text-white line-clamp-3">
+                      {testimonial.quote}
+                    </span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
