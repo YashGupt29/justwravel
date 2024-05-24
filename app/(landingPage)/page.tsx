@@ -57,7 +57,7 @@ const LandingPage = () => {
       refreshAccessToken();
     }, 1800000); // Refresh token every 30 minutes
 
-    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+    return () => clearInterval(intervalId);
   }, [token, refreshAccessToken]);
 
   if (!isMounted) {

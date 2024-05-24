@@ -82,7 +82,7 @@ export function NavigationMenuBar() {
     return (
       <div className="flex flex-col bg-gradient-to-b from-sky-100 to-[#255CB8]">
         <div className="flex  justify-between p-4 ">
-          <Link href="/">
+          <Link href={token ? "/" : ""}>
             <Image src="/logo.png" alt="logo" height={180} width={180} />
           </Link>
           <div className="flex justify-center gap-2">
@@ -102,7 +102,7 @@ export function NavigationMenuBar() {
   return (
     <>
       <div className="flex justify-between items-center pt-[20px]  pb-[25px] lg:px-[2%]  shadow-bottom-lg">
-        <Link href="/">
+        <Link href={token ? "/" : ""}>
           <Image src="/logo.png" alt="logo" height={180} width={180} />
         </Link>
         <NavigationMenu>
